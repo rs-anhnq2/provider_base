@@ -64,6 +64,13 @@ dependencies:
   # Local storage
   shared_preferences: ^2.0.12
 
+  # QR Code
+  qr_flutter: ^4.0.0
+  qr_code_scanner: ^0.6.1
+  qr_code_tools: ^0.0.7
+
+  # Pick image from gallery
+  image_picker: ^0.8.4+7
 
 dev_dependencies:
   flutter_test:

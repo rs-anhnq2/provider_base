@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:provider_base/screens/home/home_screen.dart';
 import 'package:provider_base/screens/login/login_state_notifier.dart';
+import 'package:provider_base/screens/qrCode/qrCode_screen.dart';
 
 import '../../utils/utils.dart';
 
@@ -30,6 +31,14 @@ class LoginScreen extends HookConsumerWidget with Utils {
                 onTap: () {
                   _signInWithFacebook(context, ref);
                 }),
+
+            // QR Scanner
+            customBtn(
+                label: 'QR Code',
+                iconColor: const Color(0xFF2986cc),
+                iconData: FontAwesomeIcons.qrcode,
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => QRCodeScreen()))),
           ],
         ),
       ),
