@@ -25,9 +25,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
       email: googleSignInAccount?.email,
       photoUrl: googleSignInAccount?.photoUrl,
     );
-    if(userDetail != null) {
       state = LoginState(userDetail: userDetail);
-    }
   }
 
   Future<void> signInWithFacebook() async {
@@ -46,9 +44,6 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
         photoUrl: requestData['picture']['data']['url'],
       );
       state = state.copyWith(userDetail: newUser);
-    }
-    if(result.hashCode != 200){
-      return null;
     }
   }
 

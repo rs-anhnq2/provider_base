@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:provider_base/screens/home/home_screen.dart';
 import 'package:provider_base/screens/login/login_state_notifier.dart';
+import 'package:provider_base/screens/otp/otp_screen.dart';
 
 import '../../common/common_view/common_button.dart';
 import '../../utils/utils.dart';
@@ -17,6 +18,13 @@ class LoginScreen extends HookConsumerWidget with Utils {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            CommonButton.customBtn(
+                label: 'Send OTP',
+                iconColor: const Color(0xff5c5c5c),
+                iconData: FontAwesomeIcons.solidEnvelope,
+                onTap: () {
+                  pushReplacement(context,const OTPScreen());
+                }),
             CommonButton.customBtn(
                 label: 'Login with Google',
                 iconColor: const Color(0xFFf44336),
