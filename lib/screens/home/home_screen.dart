@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:provider_base/common/common_view/common_indicator.dart';
+import 'package:provider_base/common/core/app_color.dart';
 import 'package:provider_base/screens/login/login_screen.dart';
 import 'package:provider_base/screens/login/login_state_notifier.dart';
 import 'package:provider_base/screens/post/post_screen.dart';
+import 'package:provider_base/screens/reel/reel_screen.dart';
 import 'package:provider_base/utils/utils.dart';
 
 import 'home_state_notifier.dart';
@@ -18,7 +21,7 @@ class HomeScreen extends HookConsumerWidget with Utils {
     // final state = ref.watch(homeProvider);
     // if declare state here entire HomeScreen will be rebuild when state change
     double _avtRadius = 32;
-    final loginState = ref.watch(loginProvider);
+    final userState = ref.watch(loginProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -49,14 +52,9 @@ class HomeScreen extends HookConsumerWidget with Utils {
               );
             },
           ),
-          CircleAvatar(
-            backgroundColor: Colors.black,
-            radius: _avtRadius,
-            backgroundImage:
-                NetworkImage(loginState.userDetail?.photoUrl ?? ''),
-          ),
+          CommonIndicator.imageCircle(AppColor.whileColor, _avtRadius, userState.userDetail?.photoUrl ?? 'https://picsum.photos/250?image=9'),
           Text(
-            loginState.userDetail?.displayName ?? '',
+            userState.userDetail?.displayName ?? '',
             style: const TextStyle(
               fontSize: 18,
             ),
@@ -90,7 +88,7 @@ class HomeScreen extends HookConsumerWidget with Utils {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-              userState.userDetail?.displayName ?? 'Name',
+              userState.userDetail?.displayName ?? '',
               style: const TextStyle(fontSize: 24),
             ),
             accountEmail: Text(userState.userDetail?.email ?? ''),
@@ -99,9 +97,14 @@ class HomeScreen extends HookConsumerWidget with Utils {
                   NetworkImage(userState.userDetail?.photoUrl ?? ''),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.power_settings_new),
-            title: const Text('Logout'),
+          _listTileDrawer(
+            iconTile: const Icon(Icons.home),
+            titleTile: 'Reel',
+            onTap: () => push(context,const ReelScreen()),
+          ),
+          _listTileDrawer(
+            iconTile: const Icon(Icons.power_settings_new),
+            titleTile: 'Logout',
             onTap: () {
               ref.read(loginProvider.notifier).logOut();
               pushAndRemoveUntil(context, const LoginScreen());
@@ -109,6 +112,17 @@ class HomeScreen extends HookConsumerWidget with Utils {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _listTileDrawer(
+      {required Icon iconTile,
+      required String titleTile,
+      required Function() onTap}) {
+    return ListTile(
+      leading: iconTile,
+      title: Text(titleTile),
+      onTap: onTap,
     );
   }
 }

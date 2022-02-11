@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CommonButton {
   static Widget customBtn(
-      {Color backgoundColor = Colors.white,
+      {Color backgroundColor = Colors.white,
       required String label,
       Color labelColor = Colors.blue,
       required Color iconColor,
@@ -11,7 +11,7 @@ class CommonButton {
       required Function() onTap}) {
     return ElevatedButton.icon(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(backgoundColor),
+        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
       ),
       onPressed: onTap,
       icon: FaIcon(
@@ -52,6 +52,18 @@ class CommonButton {
         ),
         child: const Icon(Icons.close, size: 20),
       ),
+    );
+  }
+
+  static Widget iconBtn(BuildContext context, Function onPressed,
+      {required Icon iconBtn,
+      required Color colorBtn,
+      required double iconSize}) {
+    return IconButton(
+      onPressed: () {},
+      icon: iconBtn,
+      color: colorBtn,
+      iconSize: iconSize,
     );
   }
 }

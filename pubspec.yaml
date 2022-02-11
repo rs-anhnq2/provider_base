@@ -74,6 +74,14 @@ dependencies:
   # Local storage
   shared_preferences: ^2.0.12
 
+  # Play Video
+  video_player: ^2.2.3
+  chewie: ^1.0.0
+
+  #Text
+  expandable_text: ^2.2.0
+  marquee: ^2.2.0
+
 
 dev_dependencies:
   flutter_test:
