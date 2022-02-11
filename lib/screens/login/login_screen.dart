@@ -5,7 +5,7 @@ import 'package:provider_base/screens/home/home_screen.dart';
 import 'package:provider_base/screens/login/login_state_notifier.dart';
 import 'package:provider_base/screens/qrCode/qrCode_screen.dart';
 
-import '../../utils/utils.dart';
+import 'package:provider_base/utils/utils.dart';
 
 class LoginScreen extends HookConsumerWidget with Utils {
   const LoginScreen({Key? key}) : super(key: key);
