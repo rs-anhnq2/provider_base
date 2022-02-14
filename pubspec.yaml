@@ -76,7 +76,6 @@ dependencies:
 
   # Play Video
   video_player: ^2.2.3
-  chewie: ^1.0.0
 
   #Text
   expandable_text: ^2.2.0

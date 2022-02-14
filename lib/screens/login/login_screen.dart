@@ -51,7 +51,7 @@ class LoginScreen extends HookConsumerWidget with Utils {
     if (userState.userDetail?.displayName == null) {
       snackBar(context, 'Login Failed', Colors.red);
     } else {
-      snackBar(context, 'Login Succesfully', Colors.green);
+      snackBar(context, 'Login Successful', Colors.green);
       await pushReplacement(context, const HomeScreen(title: 'Base'));
     }
   }
@@ -62,7 +62,7 @@ class LoginScreen extends HookConsumerWidget with Utils {
     if (userState.userDetail?.displayName == null) {
       snackBar(context, 'Login Failed', Colors.red);
     } else {
-      snackBar(context, 'Login Succesfully', Colors.green);
+      snackBar(context, 'Login Successful', Colors.green);
       await pushReplacement(context, const HomeScreen(title: 'Base'));
     }
   }

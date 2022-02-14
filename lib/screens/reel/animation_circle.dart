@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import '../../common/common_view/common_indicator.dart';
 import '../../common/core/app_color.dart';
 
-class AnimationWidget extends StatefulWidget {
-  const AnimationWidget({Key? key}) : super(key: key);
+class CircleAnimation extends StatefulWidget {
+  const CircleAnimation({Key? key}) : super(key: key);
 
   @override
-  _AnimationWidgetState createState() => _AnimationWidgetState();
+  _CircleAnimationState createState() => _CircleAnimationState();
 }
 
-class _AnimationWidgetState extends State<AnimationWidget>
+class _CircleAnimationState extends State<CircleAnimation>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   @override

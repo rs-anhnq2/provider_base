@@ -8,7 +8,8 @@ final reelProvider = StateNotifierProvider<ReelStateNotifier, Reel>(
 class ReelStateNotifier extends StateNotifier<Reel> {
   ReelStateNotifier() : super(const Reel());
 
-  Future<void> tapLike() async{
-    state != const Reel(isLike: false);
+  void tapLike(){
+    final bool isLike = state.isLike;
+    state = state.copyWith(isLike: !isLike);
   }
 }

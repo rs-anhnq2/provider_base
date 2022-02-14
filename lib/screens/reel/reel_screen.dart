@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:provider_base/models/reel/reel_state_notifier.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../models/reel/reel_data.dart';
-import 'reel_detal.dart';
-import 'reels_acction_toolbar.dart';
-import 'reel_video_acction.dart';
+import '../../models/reel/reel_state_notifier.dart';
+import 'reel_detail.dart';
+import 'reels_action_toolbar.dart';
+import 'reel_video_action.dart';
 
-
-class ReelScreen extends StatefulWidget {
+class ReelScreen extends HookConsumerWidget {
   const ReelScreen({Key? key}) : super(key: key);
-
   @override
-  _ReelScreenState createState() => _ReelScreenState();
-}
-
-class _ReelScreenState extends State<ReelScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -49,8 +42,13 @@ class _ReelScreenState extends State<ReelScreen> {
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      ReelVideoAction(
-                        reel: reelData[index],
+                      GestureDetector(
+                        onDoubleTap: (){
+                          ref.read(reelProvider.notifier).tapLike();
+                        },
+                        child: ReelVideoAction(
+                          reel: reelData[index],
+                        ),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.end,
