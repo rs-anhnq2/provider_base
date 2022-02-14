@@ -1,7 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_base/common/common_view/common_indicator.dart';
-import 'package:provider_base/screens/reel/like_icon.dart';
+import 'package:provider_base/screens/reel/like_acction.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../models/reel/reel.dart';
@@ -52,9 +52,8 @@ class _ReelVideoActionState extends State<ReelVideoAction> {
                 :  CommonIndicator.loadingIndicator(),
             if(_isLike)
               const Center(
-                child: LikeIcon(),
+                child: LikeAcction(),
               )
-
           ],
         )
 
@@ -73,14 +72,7 @@ class _ReelVideoActionState extends State<ReelVideoAction> {
         showControls: true,
         //showControlsOnInitialize: true,
         allowFullScreen: false,
-        materialProgressColors: ChewieProgressColors(
-          backgroundColor: Colors.black,
-          bufferedColor: Colors.white,
-        ),
-        cupertinoProgressColors: ChewieProgressColors(
-            playedColor: Colors.yellow,
-            bufferedColor: Colors.blue,
-            backgroundColor: Colors.red));
+    );
     setState(() {});
   }
 }

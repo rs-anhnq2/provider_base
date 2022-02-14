@@ -46,24 +46,30 @@ class ReelActionToolbar extends HookConsumerWidget with Utils {
             )
           ],
         ),
-        CommonButton.iconBtn(context, () {
-          ref.read(reelProvider.notifier).tapLike();
-          print('liker');
-        },
-            iconBtn: const Icon(Icons.favorite),
-            colorBtn: reelState.isLike == false
-                ? AppColor.whileColor
-                : AppColor.redColor,
-            iconSize: _iconSize),
+        CommonButton.iconBtn(
+          context,
+          onPressed: () {
+            ref.read(reelProvider.notifier).tapLike();
+          },
+          iconBtn: const Icon(Icons.favorite),
+          colorBtn: ref.watch(reelProvider).isLike == false
+              ? AppColor.whileColor
+              : AppColor.redColor,
+          iconSize: _iconSize,
+        ),
         const Text(
           '24325',
           style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         const SizedBox(
           height: 10,
         ),
-        CommonButton.iconBtn(context, () {},
+        CommonButton.iconBtn(context,
+            onPressed: () {},
             iconBtn: const Icon(Icons.comment),
             colorBtn: AppColor.whileColor,
             iconSize: _iconSize),
@@ -75,7 +81,8 @@ class ReelActionToolbar extends HookConsumerWidget with Utils {
         const SizedBox(
           height: 10,
         ),
-        CommonButton.iconBtn(context, () {},
+        CommonButton.iconBtn(context,
+            onPressed: () {},
             iconBtn: const Icon(Icons.reply),
             colorBtn: AppColor.whileColor,
             iconSize: _iconSize),

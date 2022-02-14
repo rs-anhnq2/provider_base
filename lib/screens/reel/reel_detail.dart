@@ -74,11 +74,6 @@ class ReelDetail extends HookConsumerWidget with Utils {
               )
             ],
           ),
-          //     : Text(
-          //   '${reel.title}',
-          //   style: TextStyle(
-          //       color: Colors.white, fontWeight: FontWeight.w500),
-          // ),
           leading: const Icon(Icons.graphic_eq_outlined,
               size: 16, color: Colors.white),
         ),
