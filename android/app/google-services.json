@@ -1,49 +1,50 @@
 {
   "project_info": {
-    "project_number": "444556518136",
-    "project_id": "provider-base",
-    "storage_bucket": "provider-base.appspot.com"
+    "project_number": "216175012655",
+    "project_id": "base-project-59281",
+    "storage_bucket": "base-project-59281.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:444556518136:android:4f22a3c9d12504b72cd10d",
+        "mobilesdk_app_id": "1:216175012655:android:33650d6dc31ea255e3cfda",
         "android_client_info": {
           "package_name": "com.example.provider_base"
         }
       },
       "oauth_client": [
         {
-          "client_id": "444556518136-3j5crn2uiuph8fedo82p038v917rurnb.apps.googleusercontent.com",
+          "client_id": "216175012655-79j3lq1o93kk6jkap17aa92iuu9c2al6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.provider_base",
-            "certificate_hash": "eb3db2116d164a778141d749b0a39dd4477cf58a"
+            "certificate_hash": "b730771a38942afdf56a9a8697f3da4f1d92a80f"
           }
         },
         {
-          "client_id": "444556518136-v5dssui871vilfmdb8nuf12odma4ekj0.apps.googleusercontent.com",
+          "client_id": "216175012655-s1pfgejqngphq68q7o7f3bqqp1rai592.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.provider_base",
+            "certificate_hash": "7671b0b0e8c29a3b5797efb26a075e07cad7972f"
+          }
+        },
+        {
+          "client_id": "216175012655-o40ft8q4l42onvuvjgin5cgvuajaotaj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDUQGL6jgpXZFNh6TC_S3sKRLk3I7-dRLU"
+          "current_key": "AIzaSyCgFdUmr9hdr7j7xJOqbsOP9FFkFc-xSa4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "444556518136-v5dssui871vilfmdb8nuf12odma4ekj0.apps.googleusercontent.com",
+              "client_id": "216175012655-o40ft8q4l42onvuvjgin5cgvuajaotaj.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "444556518136-541391jro7ctudim4j720bkkoettsa2a.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.providerBase"
-              }
             }
           ]
         }
