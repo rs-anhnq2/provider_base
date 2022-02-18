@@ -71,6 +71,8 @@ dependencies:
   # Local storage
   shared_preferences: ^2.0.12
 
+  # Google analysis
+  firebase_analytics: ^9.1.0
 
 dev_dependencies:
   flutter_test:
