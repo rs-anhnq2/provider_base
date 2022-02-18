@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:provider_base/screens/file/file_handling_screen.dart';
 import 'package:provider_base/screens/post/post_screen.dart';
 import 'package:provider_base/utils/utils.dart';
 
@@ -51,7 +52,12 @@ class HomeScreen extends HookConsumerWidget with Utils {
           ),
           ElevatedButton(
               onPressed: () => push(context, const PostScreen()),
-              child: const Text('Post List'))
+              child: const Text('Post List')),
+
+          ElevatedButton(
+              onPressed: () => push(context, const FileHandlingScreen()),
+              child: const Text('File')),
+
         ],
       ),
       floatingActionButton: FloatingActionButton(
