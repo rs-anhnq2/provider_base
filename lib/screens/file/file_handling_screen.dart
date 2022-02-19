@@ -1,7 +1,8 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider_base/screens/file/file_handling.dart';
-import 'package:provider_base/screens/file/upload_file_screen.dart';
 
 class FileHandlingScreen extends StatefulWidget {
   const FileHandlingScreen({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class FileHandlingScreen extends StatefulWidget {
 }
 
 class _FileHandlingScreenState extends State<FileHandlingScreen> {
+  FileHandling fileHandling = FileHandling();
 
   @override
   Widget build(BuildContext context) {
@@ -19,29 +21,38 @@ class _FileHandlingScreenState extends State<FileHandlingScreen> {
         title: const Text('File Handling'),
         actions: [
           IconButton(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UploadFileScreen())),
+              onPressed: () => fileHandling.openFileExplorer(),
               icon: const Icon(Icons.upload_file))
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child:
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child:
 
-        Column(
-          children: [
-            listFiles.length == 0 ? Container() : ListView.builder(
-              shrinkWrap: true,
-              itemCount: listFiles.length,
-              itemBuilder: (context, index) =>
-                  buildFileCard(listFiles[index]),
-            ),
-            ElevatedButton(
-                onPressed: () => FileHandling().downloadFile(
-                    'https://hosonhanvat.net/wp-content/uploads/2020/07/Luffy-1.jpg',
-                    'Luffy-1.jpg'),
-                child: Text('Test download'))
-          ],
+          Column(
+            children: [
+              // ElevatedButton(onPressed: () {
+              //   listFiles.forEach((e) {
+              //     print(e);
+              //   });
+              // }, child: Text('Test')),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: fileHandling.listFiles.length,
+                itemBuilder: (context, index) =>
+                    buildFileCard(fileHandling.listFiles[index]),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    _showSimpleDialog(context);
+                    FileHandling().downloadFile(
+                        'https://hosonhanvat.net/wp-content/uploads/2020/07/Luffy-1.jpg',
+                        'Luffy-1.jpg');
+                  },
+                  child: Text('Test download'))
+            ],
+          ),
         ),
       ),
     );
@@ -72,6 +83,20 @@ class _FileHandlingScreenState extends State<FileHandlingScreen> {
         ],
       ),
     );
+  }
+
+  // Show dialog
+  _showSimpleDialog(BuildContext context) {
+    showDialog(context: context, builder: (context) {
+      return const SimpleDialog(
+        contentPadding: EdgeInsets.all(20),
+        children: [
+          Text('Downloading...'),
+          Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+            child: LinearProgressIndicator(),),
+        ],
+      );
+    });
   }
 
 }

@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -8,19 +7,22 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-List listFiles = [];
+// List listFiles = ['gjhgjhhvvvnkhjkjm'];
 
 class FileHandling {
+  List<PlatformFile> listFiles = [];
 
   // Pick file
   void openFileExplorer() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.any,
-        allowMultiple: true,
+      type: FileType.any,
+      allowMultiple: true,
     );
-    if(result != null) {
+    if (result != null) {
       final files = result.files;
-      listFiles.add(files);
+      files.forEach((file) {
+        listFiles.add(file);
+      });
     }
     return;
   }
@@ -30,7 +32,7 @@ class FileHandling {
     OpenFile.open(file.path);
   }
 
-  // Save file to storage
+  // Save file to phone storage
   Future<bool> saveFile(String url, String fileName) async {
     final Dio dio = Dio();
     Directory directory;
@@ -41,7 +43,6 @@ class FileHandling {
             await _requestPermission(Permission.manageExternalStorage)) {
           directory = (await getExternalStorageDirectory())!;
           String newPath = '';
-          print(directory);
 
           List<String> paths = directory.path.split("/");
           for (int x = 1; x < paths.length; x++) {
@@ -83,7 +84,7 @@ class FileHandling {
     }
   }
 
-  // request permission
+  // Request permission
   Future<bool> _requestPermission(Permission permission) async {
     if (await permission.isGranted) {
       return true;
@@ -106,5 +107,4 @@ class FileHandling {
       print("Failed");
     }
   }
-
 }
