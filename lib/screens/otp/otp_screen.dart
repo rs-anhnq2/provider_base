@@ -14,7 +14,7 @@ class OTPScreen extends StatefulWidget with Utils {
 class _OTPScreenState extends State<OTPScreen> {
   String dialCodeDigits = '+84';
   final TextEditingController _otpController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   @override
   void dispose() {
     super.dispose();
@@ -31,11 +31,15 @@ class _OTPScreenState extends State<OTPScreen> {
               height: 72,
             ),
             const Center(
-              child: Text('Enter your mobile number', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+              child: Text(
+                'Enter your mobile number',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
             ),
             const Padding(
               padding: EdgeInsets.fromLTRB(15, 10, 15, 20),
-              child: Text('Verify your account through phone number. We will send you a one time verification code.'),
+              child: Text(
+                  'Verify your account through phone number. We will send you a one time verification code.'),
             ),
             const SizedBox(
               height: 50,
@@ -55,14 +59,26 @@ class _OTPScreenState extends State<OTPScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(120, 0, 15, 0),
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      hintText: 'Phone Number',
-                      // prefix: Text(dialCodeDigits),
+                  child: Form(
+                    key: _formKey,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return ('Please Enter Your Phone');
+                        }
+                        if(value.length <6){
+                          return ('Please Enter Valid Phone');
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Phone Number',
+                        // prefix: Text(dialCodeDigits),
+                      ),
+                      maxLength: 12,
+                      keyboardType: TextInputType.number,
+                      controller: _otpController,
                     ),
-                    maxLength: 12,
-                    keyboardType: TextInputType.number,
-                    controller: _otpController,
                   ),
                 ),
               ],
@@ -71,17 +87,19 @@ class _OTPScreenState extends State<OTPScreen> {
               margin: const EdgeInsets.all(15),
               width: double.infinity,
               child: CommonButton.customBtn(
-                  label: 'Next',
+                  label: 'Continue',
                   iconColor: const Color(0xff5c5c5c),
                   iconData: Icons.arrow_forward,
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OTPController(
-                                  phone: _otpController.text,
-                                  codeDigits: dialCodeDigits,
-                                )));
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OTPController(
+                                    phone: _otpController.text,
+                                    codeDigits: dialCodeDigits,
+                                  )));
+                    }
                   }),
             ),
           ],

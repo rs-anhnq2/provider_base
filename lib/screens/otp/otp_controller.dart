@@ -19,7 +19,6 @@ class _OTPControllerState extends State<OTPController> {
   final TextEditingController _pinOTPCodeController = TextEditingController();
   final FocusNode _pinOTPCodeFocus = FocusNode();
   String? verificationCode;
-
   @override
   void initState() {
     super.initState();
@@ -46,19 +45,18 @@ class _OTPControllerState extends State<OTPController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 10,
+              height: 30,
+            ),
+            const Text(
+              'OTP Verification',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
             Container(
-              padding: const EdgeInsets.only(top: 20),
-              child: GestureDetector(
-                onTap: () {
-                  verifyPhoneNumber();
-                },
-                child: Text(
-                  'Verifying : ${widget.codeDigits} ${widget.phone}',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500, fontSize: 16),
-                ),
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                'We sent your code to : ${widget.codeDigits} ${widget.phone.substring(0,5)}****',
+                style:
+                    const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
               ),
             ),
             Padding(
@@ -69,30 +67,32 @@ class _OTPControllerState extends State<OTPController> {
                     const TextStyle(fontSize: 25, color: Colors.blueAccent),
                 eachFieldWidth: 40,
                 eachFieldHeight: 55,
-                focusNode: _pinOTPCodeFocus,
                 controller: _pinOTPCodeController,
+                focusNode: _pinOTPCodeFocus,
                 submittedFieldDecoration: pinOTPCodeDecoration,
                 selectedFieldDecoration: pinOTPCodeDecoration,
                 followingFieldDecoration: pinOTPCodeDecoration,
                 pinAnimationType: PinAnimationType.rotation,
+                onChanged: (value) async {
+                  setState(() {
+                    _pinOTPCodeController.text = value;
+                  });
+                },
                 onSubmit: (pin) async {
                   try {
-                    await FirebaseAuth.instance
-                        .signInWithCredential(PhoneAuthProvider.credential(
-                            verificationId: verificationCode!, smsCode: pin))
-                        .then((value) {
-                      if (value.user != null &&
-                          _pinOTPCodeController.text == pin) {
-                        FocusScope.of(context).requestFocus(_pinOTPCodeFocus);
-                        print('pin-- ${pin}');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const HomeScreen(title: 'Base')));
-                      }
-                    });
+                    await FirebaseAuth.instance.signInWithCredential(
+                        PhoneAuthProvider.credential(
+                            verificationId: verificationCode!, smsCode: pin));
+                    if (_pinOTPCodeController.text == pin) {
+                      FocusScope.of(context).requestFocus(_pinOTPCodeFocus);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const HomeScreen(title: 'Base')));
+                    }
                   } catch (e) {
+                    print(e);
                     FocusScope.of(context).unfocus();
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Invalid OTP'),
@@ -127,8 +127,10 @@ class _OTPControllerState extends State<OTPController> {
             .signInWithCredential(credential)
             .then((value) {
           if (value.user != null) {
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => const LoginScreen()));
+            print('SMS code: ${credential.smsCode}');
+            setState(() {
+              _pinOTPCodeController.text = credential.smsCode!;
+            });
           }
         });
       },
@@ -140,14 +142,10 @@ class _OTPControllerState extends State<OTPController> {
         print(e.message.toString());
       },
       codeSent: (String vID, int? resendToken) {
-        setState(() {
           verificationCode = vID;
-        });
       },
       codeAutoRetrievalTimeout: (String vID) {
-        setState(() {
           verificationCode = vID;
-        });
       },
       timeout: const Duration(seconds: 60),
     );
