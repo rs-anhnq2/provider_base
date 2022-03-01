@@ -34,6 +34,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  #provider
+  #provider: ^6.0.2
+  #state_notifier: ^0.7.1
+  #flutter_state_notifier: ^0.7.1
+  
   # Architecture
   flutter_riverpod: ^1.0.3
   hooks_riverpod: ^1.0.3
@@ -44,13 +49,31 @@ dependencies:
   json_annotation: ^4.4.0
 
   # Font
+  font_awesome_flutter: ^9.2.0
   google_fonts: ^2.2.0
+
+  # Firebase
+  firebase_core: ^1.12.0
+  firebase_auth: ^3.3.6
+
+  #google signin
+  google_sign_in: ^5.2.3
+
+  #facebook signin
+  flutter_facebook_auth: ^4.0.1
+
+  #country_code
+  country_code_picker: ^2.0.2
+
+  #pin_OTP
+  pinput: ^1.2.2
 
   # Api
   http: ^0.13.4
 
   # Local storage
   shared_preferences: ^2.0.12
+
 
 dev_dependencies:
   flutter_test:
